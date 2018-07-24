@@ -7,6 +7,7 @@
  * MIT Licensed.
  */
 
+/* //not to be used anymore, new main file name : MMM-Calendar-AgP.js
 Module.register("calendar", {
 
 	// Define module defaults
