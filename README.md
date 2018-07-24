@@ -1,10 +1,23 @@
 # MMM-Calendar-AgP
-Based on the default calendar module with some personal modifications
+Based on the default calendar module with some personal modifications : 
+- Possibility to add the last update time from server at the end of the module. This can be configured using "displayLastUpdate" and "displayLastUpdateFormat"
+- extra update by "resume" call or "USER_PRESENCE" = true notification
+- style updates (directly here and not by css...)
 
 # Module: Calendar
 The `calendar` module is one of the default modules of the MagicMirror.
 This module displays events from a public .ical calendar. It can combine multiple calendars.
 Note that calendars may not contain any entry before 1st January 1970, otherwise the calendar won't be displayed and the module will crash.
+
+
+## Module installation
+
+Git clone this repo into ~/MagicMirror/modules directory :
+```
+cd ~/MagicMirror/modules
+git clone https://github.com/AgP42/MMM-Calendar-AgP.git
+```
+and add the configuration section in Magic Mirror config file 
 
 ## Using the module
 
@@ -12,12 +25,38 @@ To use this module, add it to the modules array in the `config/config.js` file:
 ````javascript
 modules: [
 	{
-		module: "calendar",
-		position: "top_left",	// This can be any of the regions. Best results in left or right regions.
+		module: "MMM-Calendar-AgP",
+		position: "bottom_left",	// This can be any of the regions. Best results in left or right regions.
 		config: {
 			// The config property is optional.
 			// If no config is set, an example calendar is shown.
 			// See 'Configuration options' for more information.
+			colored: false,
+			coloredSymbolOnly: true,
+			displaySymbol: true,
+			maxTitleLength: 20,// de 10 à 50
+			wrapEvents: true,
+			fetchInterval: 30*60*1000, //30 min. par défault = 5min
+			timeFormat: 'absolute', // absolute or relative or dateheaders 
+			hidePrivate: true,
+			getRelative: 2, //nombre d'heures avant l'even pour l'afficher plutot en relatif qu'en absolu. max : 48
+			maximumNumberOfDays:7,
+			broadcastEvents: false,
+			
+			displayLastUpdate: true, //add or not a line after the tasks with the last server update time
+			displayLastUpdateFormat: 'dd - HH:mm:ss', //format to display the last update. 
+
+			calendars: [
+				{
+				url: 'https://calendar.google.com/blablabla/basic.ics',
+				symbol: 'calendar',
+				auth: {
+				    user: 'ichich@gmail.com',
+				    pass: 'strongpass',
+				    method: 'basic'
+					}
+				},
+			],
 		}
 	}
 ]
@@ -30,6 +69,8 @@ The following properties can be configured:
 
 | Option                       | Description
 | ---------------------------- | -----------
+| `displayLastUpdate`          | add or not a line after the tasks with the last server update time. / **Possible values:** `true` - `false` <br> **Default value:** `true`
+| `displayLastUpdateFormat`    | format to display the last update. See [Moment.js formats](http://momentjs.com/docs/#/parsing/string-format/) <br><br> **Default value:** `dd - HH:mm:ss`
 | `maximumEntries`             | The maximum number of events shown. / **Possible values:** `0` - `100` <br> **Default value:** `10`
 | `maximumNumberOfDays`        | The maximum number of days in the future. <br><br> **Default value:** `365`
 | `displaySymbol`              | Display a symbol in front of an entry. <br><br> **Possible values:** `true` or `false` <br> **Default value:** `true`
