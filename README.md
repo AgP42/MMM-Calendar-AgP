@@ -4,6 +4,9 @@ Based on the default calendar module with some personal modifications :
 - extra update by "resume" call or "USER_PRESENCE" = true notification
 - style updates (directly here and not by css...)
 
+![MMM-Calendar-AgP](https://raw.githubusercontent.com/AgP42/MMM-Calendar-AgP/master/MMM-Calendar-AgP.png "Image of MMM-Calendar-AgP")
+
+
 # Module: Calendar
 The `calendar` module is one of the default modules of the MagicMirror.
 This module displays events from a public .ical calendar. It can combine multiple calendars.
