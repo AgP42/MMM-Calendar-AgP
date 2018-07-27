@@ -6,7 +6,6 @@
  * By Michael Teeuw http://michaelteeuw.nl
  * MIT Licensed.
  */
- 
   
  /*
   * Update by AgP42 the 19/07/2018
@@ -84,12 +83,12 @@ Module.register("MMM-Calendar-AgP", {
 	start: function () {
 		Log.log("Starting module: " + this.name);
 		
-		var lastUpdate = 0; //timestamp of the last module update. set at 0 at start-up
+		this.lastUpdate = 0; //timestamp of the last module update. set at 0 at start-up
 
 		// Set locale.
 		moment.updateLocale(config.language, this.getLocaleSpecification(config.timeFormat));
 
-//		this.updateCalendar(); //will be requested by resume after start-up
+		this.updateCalendar();
 
 	},
 	
